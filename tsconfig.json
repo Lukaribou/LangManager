@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "CommonJS",
+    "pretty": true,
+    "declaration": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "outDir": "out",
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*"]
+}
