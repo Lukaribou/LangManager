@@ -39,7 +39,7 @@ class LangManager {
     deleteLanguage(code) {
         return this._languages.delete(code);
     }
-    analyse(code) {
+    analyze(code) {
         if (!this.hasLanguage(code))
             throw new LanguageNotFound(code);
     }

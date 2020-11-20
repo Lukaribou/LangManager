@@ -23,7 +23,7 @@ export declare class LangManager {
      * @param code The code of the country
      */
     deleteLanguage(code: string): boolean;
-    analyse(code: string): string[];
+    analyze(code: string): string[];
 }
 export declare class LanguageNotFound extends Error {
     constructor(languageCode: string);

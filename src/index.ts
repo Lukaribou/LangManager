@@ -1,13 +1,9 @@
 export class LangManager {
     private _languages = new Map<string, Object>();
 
-    get languages() {
-        return this._languages;
-    }
-
     /**
      * Add a language to the manager
-     * @param code The token to access the language ("en" for english, "fr" for french... See https://en.wikipedia.org/wiki/ISO_3166-1)
+     * @param code The code of the country, to access to the language (See https://en.wikipedia.org/wiki/ISO_3166-1)
      * @param json The object with the sentences
      * @param check True to block erase if language is already defined
      */
@@ -27,9 +23,27 @@ export class LangManager {
 
     /**
      * If the language is set or not
-     * @param code The language code
+     * @param code The code of the country
      */
     public hasLanguage(code: string): boolean {
         return this._languages.has(code);
+    }
+
+    /**
+     * Remove the language from the manager
+     * @param code The code of the country
+     */
+    public deleteLanguage(code: string): boolean {
+        return this._languages.delete(code);
+    }
+
+    public analyze(code: string): string[] {
+        if (!this.hasLanguage(code)) throw new LanguageNotFound(code);
+    }
+}
+
+export class LanguageNotFound extends Error {
+    constructor(languageCode: string) {
+        super(`Language with code "${languageCode}" not found !`);
     }
 }
