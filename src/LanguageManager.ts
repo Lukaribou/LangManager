@@ -13,7 +13,8 @@ export class LanguageManager {
      * @param check True to block erase if language is already defined
      */
     public registerLanguage(lang: Language, check = true): void {
-        if (check && this._languages.has(lang.code)) return;
+        if (check && this._languages.has(lang.code))
+            return;
         this._languages.set(lang.code, lang);
     }
 
@@ -46,16 +47,24 @@ export class LanguageManager {
     }
 
     /**
-     * Returns a list of the fields that aren't set in all the languages
+     * Returns a list of the fields that are empty or not set in all the languages
      * @param code The code of the country
      */
     public analyze(code: string): string[] {
         if (!this.hasLanguage(code)) throw new LanguageNotFound(code);
-        let fields = new Array<string>(), warnings = new Array<string>();
+        let allFields = new Array<string>(), warnings = new Array<string>();
+        // Lister champs définis dans tous les langages
         this.languages.forEach((lang) => lang.fields.forEach((field) => {
-            if (!fields.includes(field)) fields.push(field); // Lister champs définis dans tous
+            if (!allFields.includes(field))
+                allFields.push(field);
         }));
-
+        // Analyser et dire quels champs ne sont pas définis chez qui
+        this.languages.forEach((lang) => allFields.forEach((field) => {
+            if (!lang.hasField(field))
+                warnings.push(`${lang.name} (${lang.code}): Field "${field}" is not declared.`);
+            else if (lang.getValue(field) === '')
+                warnings.push(`${lang.name} (${lang.code}): Field "${field}" is empty.`);
+        }));
         return warnings;
     }
 }
