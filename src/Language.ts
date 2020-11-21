@@ -48,7 +48,7 @@ export class Language {
      * @param fieldName
      */
     public get(fieldName: string): string {
-        return this.fields.includes(fieldName) ? this._data[fieldName] : "Not provided";
+        return this.has(fieldName) ? this._data[fieldName] : "Not provided";
     }
 
     /**

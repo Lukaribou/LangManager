@@ -34,7 +34,7 @@ class Language {
      * @param fieldName
      */
     get(fieldName) {
-        return this.fields.includes(fieldName) ? this._data[fieldName] : "Not provided";
+        return this.has(fieldName) ? this._data[fieldName] : "Not provided";
     }
     /**
      * Lists the fields where the value is empty
