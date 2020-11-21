@@ -75,7 +75,7 @@ class LanguageManager {
      * Prints the analyze in the console (with some informations)
      */
     printAnalyze() {
-        let allFields = new Set(this.languages.map((lang) => lang.fields).flat()), warnings = [];
+        let allFields = new Set(this.languages.map((lang) => lang.fields).flat()), warnings = [], count = 0;
         this.languages.forEach((lang) => {
             let langWarns = [];
             allFields.forEach((field) => {
@@ -84,13 +84,14 @@ class LanguageManager {
                 else if (lang.get(field) === '')
                     langWarns.push(`Field "${field}" is empty.`);
             });
+            count += langWarns.length;
             if (langWarns.length !== 0)
-                warnings.push(`${lang.name} (${lang.code}): (${langWarns.length} warnings)\n\t` + langWarns.join("\n\t"));
+                warnings.push(`${lang.name} (${lang.code}): (${langWarns.length} warnings)\n\t\t` + langWarns.join("\n\t\t"));
         });
-        if (warnings.length === 0)
+        if (count === 0)
             return console.log("No warnings ! You're a boss !");
-        console.log(`${warnings.length} problems found:\n\n`);
-        console.log(warnings.join("\n\n"));
+        console.log(`${count} problems found:\n`);
+        console.log("\t" + warnings.join("\n\n\t"));
     }
 }
 exports.LanguageManager = LanguageManager;
