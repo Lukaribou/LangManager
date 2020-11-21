@@ -17,7 +17,7 @@ let lm = new LanguageManager_1.LanguageManager()
         "blue": "blue",
         "pink": "pink",
         "grey": ""
-    }
+    }, fileName: "en.json"
 }));
 lm.printAnalyze();
 //# sourceMappingURL=index.js.map

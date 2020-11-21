@@ -16,7 +16,7 @@ let lm = new LanguageManager()
             "blue": "blue",
             "pink": "pink",
             "grey": ""
-        }
+        }, fileName: "en.json"
     }));
 
 lm.printAnalyze();

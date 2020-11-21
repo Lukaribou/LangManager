@@ -2,12 +2,14 @@ export interface ILanguage {
     code: string;
     name: string;
     data: Object;
+    fileName?: string;
 }
 
 export class Language {
     private readonly _code: string;
     private readonly _data: Object;
     private readonly _name: string;
+    private readonly _fileName: string;
 
     get code(): string {
         return this._code;
@@ -21,14 +23,19 @@ export class Language {
         return this._data;
     }
 
+    get fileName(): string {
+        return this._fileName;
+    }
+
     get fields(): string[] {
         return Array.from(Object.keys(this._data));
     }
 
-    constructor(name: string, code: string, data: Object) {
+    constructor(name: string, code: string, data: Object, fileName: string = undefined) {
         this._code = code;
         this._name = name;
         this._data = data;
+        this._fileName = fileName;
     }
 
     /**
@@ -36,7 +43,7 @@ export class Language {
      * @param o
      */
     public static fromObject(o: ILanguage): Language {
-        return new Language(o.name, o.code, o.data);
+        return new Language(o.name, o.code, o.data, o.fileName);
     }
 
     public has(fieldName: string): boolean {
