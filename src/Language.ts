@@ -39,7 +39,7 @@ export class Language {
         return new Language(o.name, o.code, o.data);
     }
 
-    public hasField(fieldName: string): boolean {
+    public has(fieldName: string): boolean {
         return this.fields.includes(fieldName);
     }
 
@@ -47,7 +47,7 @@ export class Language {
      * Gets the value (so the traduction)
      * @param fieldName
      */
-    public getValue(fieldName: string): string {
+    public get(fieldName: string): string {
         return this.fields.includes(fieldName) ? this._data[fieldName] : "Not provided";
     }
 

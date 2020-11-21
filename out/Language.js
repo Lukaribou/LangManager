@@ -26,14 +26,14 @@ class Language {
     static fromObject(o) {
         return new Language(o.name, o.code, o.data);
     }
-    hasField(fieldName) {
+    has(fieldName) {
         return this.fields.includes(fieldName);
     }
     /**
      * Gets the value (so the traduction)
      * @param fieldName
      */
-    getValue(fieldName) {
+    get(fieldName) {
         return this.fields.includes(fieldName) ? this._data[fieldName] : "Not provided";
     }
     /**

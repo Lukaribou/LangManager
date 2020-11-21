@@ -19,4 +19,4 @@ let lm = new LanguageManager()
         }
     }));
 
-console.log(lm.analyze());
+lm.printAnalyze();

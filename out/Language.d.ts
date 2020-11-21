@@ -17,12 +17,12 @@ export declare class Language {
      * @param o
      */
     static fromObject(o: ILanguage): Language;
-    hasField(fieldName: string): boolean;
+    has(fieldName: string): boolean;
     /**
      * Gets the value (so the traduction)
      * @param fieldName
      */
-    getValue(fieldName: string): string;
+    get(fieldName: string): string;
     /**
      * Lists the fields where the value is empty
      */
