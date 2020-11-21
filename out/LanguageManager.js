@@ -51,7 +51,7 @@ class LanguageManager {
      * @param field
      */
     get(code, field) {
-        return this.getLang(code).getValue(field);
+        return this.getLang(code).get(field);
     }
     /**
      * Returns a list of the fields that are empty or not set in all the languages
@@ -62,9 +62,9 @@ class LanguageManager {
         // Analyser et dire quels champs ne sont pas définis chez qui
         this.languages.forEach((lang) => {
             allFields.forEach((field) => {
-                if (!lang.hasField(field))
+                if (!lang.has(field))
                     warnings.push(`${lang.name}: Field "${field}" is not declared.`);
-                else if (lang.getValue(field) === '')
+                else if (lang.get(field) === '')
                     warnings.push(`${lang.name}: Field "${field}" is empty.`);
             });
         });
@@ -79,9 +79,9 @@ class LanguageManager {
         this.languages.forEach((lang) => {
             let langWarns = [];
             allFields.forEach((field) => {
-                if (!lang.hasField(field))
+                if (!lang.has(field))
                     langWarns.push(`Field "${field}" is not declared.`);
-                else if (lang.getValue(field) === '')
+                else if (lang.get(field) === '')
                     langWarns.push(`Field "${field}" is empty.`);
             });
             if (langWarns.length !== 0)
