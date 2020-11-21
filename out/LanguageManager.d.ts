@@ -7,28 +7,37 @@ export declare class LanguageManager {
      * @param lang The Language Object
      * @param check True to block erase if language is already defined
      */
-    registerLanguage(lang: Language, check?: boolean): void;
+    registerLanguage(lang: Language, check?: boolean): LanguageManager;
     /**
      * If the language is set or not
-     * @param code The code of the country
+     * @param code The country's code
      */
     hasLanguage(code: string): boolean;
     /**
      * Returns the language if defined, null instead
-     * @param code The code of the country
+     * @param code The country's code
      */
-    getLanguage(code: string): Object;
+    getLang(code: string): Language;
     /**
      * Removes the language from the manager
-     * @param code The code of the country
+     * @param code The country's code
      */
-    deleteLanguage(code: string): boolean;
-    getLanguagesCodes(): string[];
+    deleteLang(code: string): boolean;
+    getLangCodes(): string[];
+    /**
+     * Gets field's value in the language
+     * @param code The country's code
+     * @param field
+     */
+    get(code: string, field: string): string;
     /**
      * Returns a list of the fields that are empty or not set in all the languages
-     * @param code The code of the country
      */
-    analyze(code: string): string[];
+    analyze(): string[];
+    /**
+     * Prints the analyze in the console (with some informations)
+     */
+    printAnalyze(): void;
 }
 export declare class LanguageNotFound extends Error {
     constructor(languageCode: string);

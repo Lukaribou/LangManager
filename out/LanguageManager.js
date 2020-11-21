@@ -17,52 +17,75 @@ class LanguageManager {
         if (check && this._languages.has(lang.code))
             return;
         this._languages.set(lang.code, lang);
+        return this;
     }
     /**
      * If the language is set or not
-     * @param code The code of the country
+     * @param code The country's code
      */
     hasLanguage(code) {
         return this._languages.has(code);
     }
     /**
      * Returns the language if defined, null instead
-     * @param code The code of the country
+     * @param code The country's code
      */
-    getLanguage(code) {
-        return this.hasLanguage(code) ? this._languages.get(code) : null;
+    getLang(code) {
+        if (!this.hasLanguage(code))
+            throw new LanguageNotFound(code);
+        return this._languages.get(code);
     }
     /**
      * Removes the language from the manager
-     * @param code The code of the country
+     * @param code The country's code
      */
-    deleteLanguage(code) {
+    deleteLang(code) {
         return this._languages.delete(code);
     }
-    getLanguagesCodes() {
+    getLangCodes() {
         return Array.from(this._languages.keys());
     }
     /**
-     * Returns a list of the fields that are empty or not set in all the languages
-     * @param code The code of the country
+     * Gets field's value in the language
+     * @param code The country's code
+     * @param field
      */
-    analyze(code) {
-        if (!this.hasLanguage(code))
-            throw new LanguageNotFound(code);
-        let allFields = new Array(), warnings = new Array();
+    get(code, field) {
+        return this.getLang(code).getValue(field);
+    }
+    /**
+     * Returns a list of the fields that are empty or not set in all the languages
+     */
+    analyze() {
         // Lister champs définis dans tous les langages
-        this.languages.forEach((lang) => lang.fields.forEach((field) => {
-            if (!allFields.includes(field))
-                allFields.push(field);
-        }));
+        let allFields = new Set(this.languages.map((lang) => lang.fields).flat()), warnings = [];
         // Analyser et dire quels champs ne sont pas définis chez qui
-        this.languages.forEach((lang) => allFields.forEach((field) => {
-            if (!lang.hasField(field))
-                warnings.push(`${lang.name} (${lang.code}): Field "${field}" is not declared.`);
-            else if (lang.getValue(field) === '')
-                warnings.push(`${lang.name} (${lang.code}): Field "${field}" is empty.`);
-        }));
+        this.languages.forEach((lang) => {
+            allFields.forEach((field) => {
+                if (!lang.hasField(field))
+                    warnings.push(`${lang.name}: Field "${field}" is not declared.`);
+                else if (lang.getValue(field) === '')
+                    warnings.push(`${lang.name}: Field "${field}" is empty.`);
+            });
+        });
         return warnings;
+    }
+    ;
+    /**
+     * Prints the analyze in the console (with some informations)
+     */
+    printAnalyze() {
+        /*this.languages.forEach((lang) => {
+            let langWarns = [];
+            allFields.forEach((field) => {
+                if (!lang.hasField(field))
+                    langWarns.push(`Field "${field}" is not declared.`);
+                else if (lang.getValue(field) === '')
+                    langWarns.push(`Field "${field}" is empty.`);
+            });
+            if (langWarns.length !== 0)
+                warnings.push(`${lang.name} (${lang.code}): (${langWarns.length} warnings)\n` + langWarns.join("\n\t"));
+        });*/
     }
 }
 exports.LanguageManager = LanguageManager;

@@ -2,8 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Language = void 0;
 class Language {
-    constructor(code, data) {
+    constructor(name, code, data) {
         this._code = code;
+        this._name = name;
         this._data = data;
     }
     get code() {
@@ -23,7 +24,7 @@ class Language {
      * @param o
      */
     static fromObject(o) {
-        return new Language(o.code, o.data);
+        return new Language(o.name, o.code, o.data);
     }
     hasField(fieldName) {
         return this.fields.includes(fieldName);

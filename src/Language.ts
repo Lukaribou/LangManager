@@ -25,8 +25,9 @@ export class Language {
         return Array.from(Object.keys(this._data));
     }
 
-    constructor(code: string, data: Object) {
+    constructor(name: string, code: string, data: Object) {
         this._code = code;
+        this._name = name;
         this._data = data;
     }
 
@@ -35,7 +36,7 @@ export class Language {
      * @param o
      */
     public static fromObject(o: ILanguage): Language {
-        return new Language(o.code, o.data);
+        return new Language(o.name, o.code, o.data);
     }
 
     public hasField(fieldName: string): boolean {

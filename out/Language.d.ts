@@ -11,7 +11,7 @@ export declare class Language {
     get name(): string;
     get data(): Object;
     get fields(): string[];
-    constructor(code: string, data: Object);
+    constructor(name: string, code: string, data: Object);
     /**
      * Returns a Language object from an Object that matches the ILanguage interface
      * @param o

@@ -1,0 +1,19 @@
+{
+  "name": "langmanager",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lukaribou/LangManager.git"
+  },
+  "author": "Lukaribou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lukaribou/LangManager/issues"
+  },
+  "homepage": "https://github.com/Lukaribou/LangManager#readme"
+}
