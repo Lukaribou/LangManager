@@ -71,7 +71,7 @@ export class LanguageManager {
                 else if (lang.getValue(field) === '')
                     warnings.push(`${lang.name}: Field "${field}" is empty.`);
             });
-        })
+        });
         return warnings;
     };
 
@@ -79,7 +79,8 @@ export class LanguageManager {
      * Prints the analyze in the console (with some informations)
      */
     public printAnalyze(): void {
-        /*this.languages.forEach((lang) => {
+        let allFields = new Set(this.languages.map((lang) => lang.fields).flat()), warnings = [];
+        this.languages.forEach((lang) => {
             let langWarns = [];
             allFields.forEach((field) => {
                 if (!lang.hasField(field))
@@ -88,8 +89,12 @@ export class LanguageManager {
                     langWarns.push(`Field "${field}" is empty.`);
             });
             if (langWarns.length !== 0)
-                warnings.push(`${lang.name} (${lang.code}): (${langWarns.length} warnings)\n` + langWarns.join("\n\t"));
-        });*/
+                warnings.push(`${lang.name} (${lang.code}): (${langWarns.length} warnings)\n\t` + langWarns.join("\n\t"));
+        });
+        if (warnings.length === 0)
+            return console.log("No warnings ! You're a boss !");
+        console.log(`${warnings.length} problems found:\n\n`);
+        console.log(warnings.join("\n\n"));
     }
 }
 

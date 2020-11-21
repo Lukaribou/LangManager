@@ -19,5 +19,5 @@ let lm = new LanguageManager_1.LanguageManager()
         "grey": ""
     }
 }));
-console.log(lm.analyze());
+lm.printAnalyze();
 //# sourceMappingURL=index.js.map
